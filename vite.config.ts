@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  base: "/dina-facefitness/", // הוסף את השורה הזו עם שם הרפוזיטורי שלך
+  base: "/", //
   server: {
     host: "::",
     port: 8080,
