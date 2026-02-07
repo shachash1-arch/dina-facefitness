@@ -3,7 +3,7 @@ import SEO from "@/components/SEO";
 
 const MoreBonuses = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-24">
       <SEO title="בונוסים נוספים – תכנים משלימים | Face Fitness" description="בונוסים נוספים: טיפים יומיומיים, פרוטוקולי תחזוקה ומשאבים להדפסה לליווי התרגול." />
       <Navigation />
 

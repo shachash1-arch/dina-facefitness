@@ -62,7 +62,7 @@ const FAQ = () => {
 
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-24">
       <SEO title="שאלות ותשובות נפוצות | Face Fitness" description="תשובות לשאלות על אימון פנים: תדירות, תוצאות, בוטוקס, ציוד ועוד." jsonLd={faqJsonLd} />
       <Navigation />
       {/* Header */}

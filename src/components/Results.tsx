@@ -22,11 +22,12 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import { Button } from "@/components/ui/button";
 
 const Results = () => {
-  const [api, setApi] = useState<CarouselApi>()
-  const [current, setCurrent] = useState(0)
-  const [count, setCount] = useState(0)
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
 
   const beforeAfterImages = [
     { image: beforeAfter1, title: "תוצאות מדהימות" },
@@ -48,36 +49,39 @@ const Results = () => {
 
   useEffect(() => {
     if (!api) {
-      return
+      return;
     }
 
-    setCount(api.scrollSnapList().length)
-    setCurrent(api.selectedScrollSnap() + 1)
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
 
     api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1)
-    })
-    
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+
     console.log("Carousel initialized with", beforeAfterImages.length, "images");
     console.log("ScrollSnaps:", api.scrollSnapList().length);
-  }, [api])
+  }, [api]);
 
   const testimonials = [
     {
       name: "רחל, גיל 42",
-      result: "תוך 3 חודשים ראיתי שינוי משמעותי בקו הלסת והעיניים נראות הרבה יותר פתוחות",
-      rating: 5
+      result:
+        "תוך 3 חודשים ראיתי שינוי משמעותי בקו הלסת והעיניים נראות הרבה יותר פתוחות",
+      rating: 5,
     },
     {
       name: "שירה, גיל 38",
-      result: "חברות שואלות אותי איך השגתי מראה כל כך רענן. התשובה היא Face Fitness עם דינה!",
-      rating: 5
+      result:
+        "חברות שואלות אותי איך השגתי מראה כל כך רענן. התשובה היא Face Fitness עם דינה!",
+      rating: 5,
     },
     {
       name: "מיכל, גיל 45",
-      result: "לאחר שנה של תרגול, אני נראית ומרגישה 10 שנים צעירה יותר. תודה דינה!",
-      rating: 5
-    }
+      result:
+        "לאחר שנה של תרגול, אני נראית ומרגישה 10 שנים צעירה יותר. תודה דינה!",
+      rating: 5,
+    },
   ];
 
   return (
@@ -95,30 +99,49 @@ const Results = () => {
               ראו את השינויים המדהימים שהשיגו תלמידותי בדרך טבעית לחלוטין
             </p>
           </div>
-          
+
           {/* Before and After Carousel */}
           <div className="mb-20">
             <div className="bg-muted rounded-3xl p-3 relative max-w-5xl mx-auto">
-              <Carousel dir="rtl" setApi={setApi} opts={{ align: "start", loop: true, containScroll: "keepSnaps", slidesToScroll: 1, direction: "rtl" }} className="w-full mx-auto pb-6">
+              <Carousel
+                dir="rtl"
+                setApi={setApi}
+                opts={{
+                  align: "start",
+                  loop: true,
+                  containScroll: "keepSnaps",
+                  slidesToScroll: 1,
+                  direction: "rtl",
+                }}
+                className="w-full mx-auto pb-6"
+              >
                 <CarouselContent className="-ml-0">
                   {beforeAfterImages.map((item, index) => (
-                    <CarouselItem key={index} className="basis-full md:basis-full lg:basis-full pl-0">
+                    <CarouselItem
+                      key={index}
+                      className="basis-full md:basis-full lg:basis-full pl-0"
+                    >
                       <div className="relative aspect-[6/5] rounded-2xl shadow-elegant overflow-hidden flex items-center justify-center bg-background">
-                        <img 
+                        <img
                           src={item.image}
                           alt={`תוצאות לפני ואחרי - ${item.title}`}
                           loading="lazy"
                           className="absolute inset-0 h-full w-full object-contain"
                           onError={(e) => {
-                            (e.currentTarget as HTMLImageElement).src = '/placeholder.svg';
+                            (e.currentTarget as HTMLImageElement).src =
+                              "/placeholder.svg";
                           }}
                         />
                         {/* Before/After Labels */}
                         <div className="absolute top-3 left-3 bg-background/80 px-4 py-2 rounded-full shadow-soft">
-                          <span className="font-playfair font-semibold text-foreground">לפני</span>
+                          <span className="font-playfair font-semibold text-foreground">
+                            לפני
+                          </span>
                         </div>
                         <div className="absolute top-3 right-3 bg-turquoise/90 px-4 py-2 rounded-full shadow-soft">
-                          <span className="font-playfair font-semibold text-white">אחרי</span>
+                          <span className="font-playfair font-semibold text-white">
+                            אחרי
+                          </span>
                         </div>
                       </div>
                     </CarouselItem>
@@ -130,10 +153,33 @@ const Results = () => {
 
               <div className="text-center mt-4">
                 <p className="text-sm md:text-base text-muted-foreground font-inter">
-                  <strong className="text-turquoise">תוצאות תלמידותי</strong> - שינוי אמיתי בדרך טבעית
+                  <strong className="text-turquoise">תוצאות תלמידותי</strong> -
+                  שינוי אמיתי בדרך טבעית
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* משפט מחיר וכפתור ממורכז */}
+          <div className="flex flex-col items-center justify-center my-10">
+            <div className="mb-4 text-xl font-inter text-center">
+              מחיר מיוחד לנרשמות עכשיו{" "}
+              <span className="font-extrabold text-turquoise">179 ₪</span>{" "}
+              במקום{" "}
+              <span className="line-through text-muted-foreground">279 ₪</span>
+            </div>
+            <Button
+              className="bg-gradient-primary hover:shadow-glow transition-all duration-300 font-inter px-10 py-4 text-lg"
+              onClick={() =>
+                window.open(
+                  "https://pay.grow.link/f6f456002c02374a1359e1962bbbbeca-MjA1NjI4OQ",
+                  "_blank",
+                  "noopener,noreferrer"
+                )
+              }
+            >
+              לתשלום והרשמה לקורס
+            </Button>
           </div>
 
           {/* Bonus Content */}
@@ -143,8 +189,9 @@ const Results = () => {
                 ומה קורה כשמתקדמים צעד נוסף?
               </h3>
               <p className="text-lg text-muted-foreground font-inter leading-relaxed mb-4">
-                בנוסף לתרגילים הבסיסיים, את מקבלת גישה גם לתרגילים מתקדמים יותר – חלקם מתוך שיטת Facebuilding.
-                אלו תרגילים שמחזקים את השרירים, מוסיפים נפח ומעצבים את הפנים, למשל:
+                בנוסף לתרגילים הבסיסיים, את מקבלת גישה גם לתרגילים מתקדמים
+                יותר – חלקם מתוך שיטת Facebuilding. אלו תרגילים שמחזקים את
+                השרירים, מוסיפים נפח ומעצבים את הפנים, למשל:
               </p>
               <ul className="space-y-2 text-muted-foreground font-inter">
                 <li>• תרגיל ייחודי להדגשת עצמות הלחיים</li>
@@ -158,12 +205,18 @@ const Results = () => {
                 💎 בונוס נוסף – לנשים במיוחד
               </h3>
               <p className="text-lg text-muted-foreground font-inter leading-relaxed">
-                אומנם זה לא תרגיל פנים ישיר, אבל הוא משפיע בעקיפין על המראה, היציבה והתחושה הכללית:
-                <strong className="text-turquoise"> חיזוק שרירי רצפת האגן.</strong>
+                אומנם זה לא תרגיל פנים ישיר, אבל הוא משפיע בעקיפין על המראה,
+                היציבה והתחושה הכללית:
+                <strong className="text-turquoise">
+                  {" "}
+                  חיזוק שרירי רצפת האגן.
+                </strong>
               </p>
               <p className="text-lg text-muted-foreground font-inter leading-relaxed mt-4">
-                אני לא פיזיותרפיסטית, אבל במהלך לימודיי בתחום ה–<span className="text-turquoise font-semibold">Face Fitness</span> עברתי הכשרה של 3 שעות בנושא זה. 
-                מאז אני מתרגלת באופן קבוע, ואני באמת מאמינה שכל אישה חייבת לדעת וליישם את זה בחיי היומיום.
+                אני לא פיזיותרפיסטית, אבל במהלך לימודיי בתחום ה–
+                <span className="text-turquoise font-semibold">Face Fitness</span>{" "}
+                עברתי הכשרה של 3 שעות בנושא זה. מאז אני מתרגלת באופן קבוע, ואני
+                באמת מאמינה שכל אישה חייבת לדעת וליישם את זה בחיי היומיום.
               </p>
             </div>
 
@@ -172,8 +225,8 @@ const Results = () => {
                 👣 בונוס שלישי – תרגילי כפות רגליים
               </h3>
               <p className="text-lg text-muted-foreground font-inter leading-relaxed mb-4">
-                לרוב אנחנו שוכחות, אבל גם לכפות הרגליים יש קשר ישיר לעמוד השדרה וליציבה.
-                תרגילים פשוטים לאצבעות וכף הרגל:
+                לרוב אנחנו שוכחות, אבל גם לכפות הרגליים יש קשר ישיר לעמוד
+                השדרה וליציבה. תרגילים פשוטים לאצבעות וכף הרגל:
               </p>
               <ul className="space-y-2 text-muted-foreground font-inter mb-4">
                 <li>• מסייעים בהפחתת בליטות (כמו "עצם בולטת")</li>
@@ -181,20 +234,20 @@ const Results = () => {
                 <li>• ובסופו של דבר – תורמים גם להרמה טבעית של הפנים</li>
               </ul>
               <p className="text-lg text-turquoise font-inter font-semibold">
-                כי כשיש לנו יציבה נכונה – הפנים תמיד נראות מורמות יותר! 
+                כי כשיש לנו יציבה נכונה – הפנים תמיד נראות מורמות יותר!
               </p>
             </div>
           </div>
-          
+
           {/* Testimonials */}
           <div className="space-y-6">
             <h3 className="font-playfair text-3xl font-bold text-center text-foreground mb-12">
               מה אומרות התלמידות שלי
             </h3>
-            
+
             <div className="grid md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
-                <div 
+                <div
                   key={index}
                   className="bg-card p-8 rounded-2xl shadow-soft hover:shadow-elegant transition-all duration-300 animate-fade-in border border-border/50"
                   style={{ animationDelay: `${index * 200}ms` }}
@@ -202,20 +255,31 @@ const Results = () => {
                   <div className="space-y-4">
                     <div className="flex justify-center space-x-1">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <span key={i} className="text-gold text-xl">⭐</span>
+                        <span key={i} className="text-gold text-xl">
+                          ⭐
+                        </span>
                       ))}
                     </div>
-                    
+
                     <p className="text-muted-foreground text-center italic font-inter leading-relaxed">
-                      "{testimonial.result.split('Face Fitness').map((part, i, arr) => (
-                        i < arr.length - 1 ? (
-                          <span key={i}>
-                            {part}<span className="text-turquoise font-semibold">Face Fitness</span>
-                          </span>
-                        ) : part
-                      ))}"
+                      "
+                      {testimonial.result
+                        .split("Face Fitness")
+                        .map((part, i, arr) =>
+                          i < arr.length - 1 ? (
+                            <span key={i}>
+                              {part}
+                              <span className="text-turquoise font-semibold">
+                                Face Fitness
+                              </span>
+                            </span>
+                          ) : (
+                            part
+                          )
+                        )}
+                      "
                     </p>
-                    
+
                     <div className="text-center">
                       <p className="font-playfair font-semibold text-turquoise">
                         {testimonial.name}
@@ -226,20 +290,32 @@ const Results = () => {
               ))}
             </div>
           </div>
-          
+
           {/* Results Statistics */}
           <div className="mt-16 grid md:grid-cols-3 gap-8 text-center animate-fade-in">
             <div className="space-y-2">
-              <div className="text-4xl font-playfair font-bold text-turquoise">95%</div>
-              <p className="text-muted-foreground font-inter">מהתלמידות רואות שיפור תוך 30 יום</p>
+              <div className="text-4xl font-playfair font-bold text-turquoise">
+                95%
+              </div>
+              <p className="text-muted-foreground font-inter">
+                מהתלמידות רואות שיפור תוך 30 יום
+              </p>
             </div>
             <div className="space-y-2">
-              <div className="text-4xl font-playfair font-bold text-gold">100%</div>
-              <p className="text-muted-foreground font-inter">תוצאות טבעיות ללא תופעות לוואי</p>
+              <div className="text-4xl font-playfair font-bold text-gold">
+                100%
+              </div>
+              <p className="text-muted-foreground font-inter">
+                תוצאות טבעיות ללא תופעות לוואי
+              </p>
             </div>
             <div className="space-y-2">
-              <div className="text-4xl font-playfair font-bold text-soft-pink-darker">5</div>
-              <p className="text-muted-foreground font-inter">שנות מחקר וניסיון מקצועי</p>
+              <div className="text-4xl font-playfair font-bold text-soft-pink-darker">
+                5
+              </div>
+              <p className="text-muted-foreground font-inter">
+                שנות מחקר וניסיון מקצועי
+              </p>
             </div>
           </div>
         </div>
