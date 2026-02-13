@@ -4,6 +4,10 @@
 // קובץ זה מקבל עדכונים מ-GROW אחרי תשלום מצליח
 // ויוצר משתמש חדש אוטומטית + שולח אימייל
 
+export const config = {
+  runtime: 'edge',
+};
+
 import { createClient } from '@supabase/supabase-js';
 
 // Supabase Client (עם Service Role Key - הרשאות מלאות)
